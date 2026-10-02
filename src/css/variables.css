@@ -1,0 +1,92 @@
+/* ==========================================================================
+   AI PULSE — DESIGN SYSTEM & TOKENS (Event Horizon & Neural Universe)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Core Color Palette — Deep Void & Event Horizon */
+  --bg-darkest: #030306;
+  --bg-primary: #07070d;
+  --bg-secondary: #0d0e19;
+  --bg-tertiary: #131525;
+  --bg-elevated: #1a1c32;
+
+  /* Accents & Neon Energy */
+  --accent-orange: #FF6600;
+  --accent-orange-glow: rgba(255, 102, 0, 0.5);
+  --accent-gold: #FFAA00;
+  --accent-cyan: #00F0FF;
+  --accent-cyan-glow: rgba(0, 240, 255, 0.5);
+  --accent-purple: #8B31FF;
+  --accent-purple-glow: rgba(139, 49, 255, 0.45);
+  --accent-pink: #FF007F;
+  --accent-green: #00FF88;
+
+  /* Category Thematic Accents */
+  --cat-llm: #00F0FF;
+  --cat-vision: #FF007F;
+  --cat-robotics: #FFAA00;
+  --cat-research: #8B31FF;
+  --cat-industry: #00FF88;
+
+  /* Text & Typography */
+  --text-primary: #F4F6FB;
+  --text-secondary: #A2A7C3;
+  --text-muted: #656A88;
+  --text-disabled: #41455E;
+  --text-inverse: #05060A;
+
+  /* Font Families */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Glassmorphism System */
+  --glass-bg: rgba(13, 15, 26, 0.65);
+  --glass-bg-hover: rgba(22, 25, 42, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(0, 240, 255, 0.4);
+  --glass-border-orange: rgba(255, 102, 0, 0.4);
+  --glass-blur: blur(20px);
+  --glass-blur-heavy: blur(32px);
+  --glass-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --glass-shadow-hover: 0 20px 50px -10px rgba(0, 240, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+  /* Spacing Scale */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+  --space-20: 5rem;    /* 80px */
+  --space-24: 6rem;    /* 96px */
+  --space-32: 8rem;    /* 128px */
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 30px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-fast: 0.2s var(--ease-out-expo);
+  --transition-normal: 0.35s var(--ease-out-expo);
+  --transition-slow: 0.6s var(--ease-out-expo);
+
+  /* Elevation & Layering */
+  --z-canvas: -1;
+  --z-base: 1;
+  --z-content: 10;
+  --z-nav: 100;
+  --z-overlay: 500;
+  --z-modal: 1000;
+  --z-cursor: 9999;
+}

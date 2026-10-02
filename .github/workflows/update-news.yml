@@ -1,0 +1,30 @@
+name: Update AI News
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Runs every 6 hours
+  workflow_dispatch:        # Allows manual triggering from GitHub Actions UI
+
+permissions:
+  contents: write
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run AI News Fetcher
+        run: node scripts/fetch-news.js
+
+      - name: Commit & Push Updated News Cache
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: '🤖 Auto-update AI news feed & benchmarks'
+          file_pattern: 'public/data/news.json data/news.json'

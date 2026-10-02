@@ -1,0 +1,144 @@
+/* ==========================================================================
+   AI PULSE — KEYFRAME ANIMATIONS, PARALLAX & CURSOR STYLING
+   ========================================================================== */
+
+/* Custom Cyber Cursor */
+.cyber-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-orange);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease-out, background-color 0.2s ease;
+  mix-blend-mode: screen;
+}
+
+.cyber-cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--accent-orange);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: calc(var(--z-cursor) - 1);
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s cubic-bezier(0.1, 1, 0.2, 1), width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+  opacity: 0.6;
+}
+
+.cyber-cursor.hovering {
+  transform: translate(-50%, -50%) scale(1.6);
+  background-color: var(--accent-cyan);
+}
+
+.cyber-cursor-follower.hovering {
+  width: 56px;
+  height: 56px;
+  border-color: var(--accent-cyan);
+  opacity: 0.9;
+  background: rgba(0, 240, 255, 0.08);
+}
+
+@media (pointer: coarse) {
+  .cyber-cursor,
+  .cyber-cursor-follower {
+    display: none !important;
+  }
+}
+
+/* Kinetic Text & Glitch Highlights */
+@keyframes neon-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(255, 102, 0, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(255, 102, 0, 0.85)) drop-shadow(0 0 50px rgba(0, 240, 255, 0.4));
+  }
+}
+
+.glow-pulse {
+  animation: neon-glow 4s ease-in-out infinite;
+}
+
+/* Subtle Floating Animation */
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.floating {
+  animation: float-subtle 6s ease-in-out infinite;
+}
+
+/* Parallax Depth Layer System */
+.parallax-layer {
+  will-change: transform;
+}
+
+/* Progressive Enhancement: Native View-Timeline for modern browsers */
+@supports ((animation-timeline: view()) and (animation-range: entry)) {
+  .parallax-view-wrapper {
+    view-timeline: --section-timeline;
+  }
+  
+  .parallax-layer[data-depth="0.1"] {
+    animation: parallax-depth-1 linear both;
+    animation-timeline: --section-timeline;
+    animation-range: entry 10% exit 90%;
+  }
+
+  .parallax-layer[data-depth="0.3"] {
+    animation: parallax-depth-2 linear both;
+    animation-timeline: --section-timeline;
+    animation-range: entry 10% exit 90%;
+  }
+
+  .parallax-layer[data-depth="0.5"] {
+    animation: parallax-depth-3 linear both;
+    animation-timeline: --section-timeline;
+    animation-range: entry 10% exit 90%;
+  }
+}
+
+@keyframes parallax-depth-1 {
+  from { transform: translateY(40px); }
+  to { transform: translateY(-40px); }
+}
+
+@keyframes parallax-depth-2 {
+  from { transform: translateY(80px); }
+  to { transform: translateY(-80px); }
+}
+
+@keyframes parallax-depth-3 {
+  from { transform: translateY(140px); }
+  to { transform: translateY(-140px); }
+}
+
+/* Reduced Motion Preference Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ticker-track {
+    animation: none !important;
+  }
+  .parallax-layer {
+    transform: none !important;
+    animation: none !important;
+  }
+}

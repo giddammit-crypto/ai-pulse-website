@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI PULSE — Горизонт Событий Искусственного Интеллекта | Главные AI Новости</title>
+  
+  <meta name="description" content="AI PULSE — инновационный новостной хаб об искусственном интеллекте с интерактивным 3D-визуалом 'Горизонт Событий', трекером передовых моделей, LLM, Computer Vision и робототехники.">
+  <meta name="keywords" content="AI, Artificial Intelligence, Искусственный интеллект, LLM, OpenAI, DeepMind, Anthropic, Three.js, Новости нейросетей, Singularity, Горизонт событий">
+  <meta name="theme-color" content="#030306">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://giddammit-crypto.github.io/ai-pulse-website/">
+  <meta property="og:title" content="AI PULSE — Горизонт Событий Искусственного Интеллекта">
+  <meta property="og:description" content="Интерактивный портал новостей искусственного интеллекта нового поколения с 3D-визуализацией сингулярности.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="AI PULSE — Горизонт Событий Искусственного Интеллекта">
+  <meta property="twitter:description" content="Интерактивный портал новостей искусственного интеллекта нового поколения с 3D-визуализацией сингулярности.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23050509' stroke='%23FF6600' stroke-width='6'/><circle cx='50' cy='50' r='18' fill='%2300F0FF'/><path d='M50 15 L50 85 M15 50 L85 50' stroke='%23FFAA00' stroke-width='4' opacity='0.7'/></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./src/css/variables.css">
+  <link rel="stylesheet" href="./src/css/main.css">
+  <link rel="stylesheet" href="./src/css/hero.css">
+  <link rel="stylesheet" href="./src/css/cards.css">
+  <link rel="stylesheet" href="./src/css/animations.css">
+</head>
+<body>
+
+  <!-- Custom Cyber Cursor -->
+  <div class="cyber-cursor" id="cyber-cursor" aria-hidden="true"></div>
+  <div class="cyber-cursor-follower" id="cyber-cursor-follower" aria-hidden="true"></div>
+
+  <!-- Background WebGL 3D Canvas -->
+  <div id="webgl-container"></div>
+  <div class="cyber-grid-overlay"></div>
+
+  <!-- SITE HEADER / NAVBAR -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-wrapper">
+      <a href="#hero" class="brand-logo" aria-label="AI Pulse Homepage">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+          </svg>
+        </div>
+        <span class="brand-name">AI PULSE</span>
+        <span class="brand-tag">2026.VOX</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#hero" class="nav-link active">Сингулярность</a></li>
+          <li><a href="#featured" class="nav-link">Главное</a></li>
+          <li><a href="#news-grid-section" class="nav-link">Лента новостей</a></li>
+          <li><a href="#stats" class="nav-link">Метрики</a></li>
+          <li><a href="#singularity-lab" class="nav-link">3D Лаборатория</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Ambient Sound Synthesizer Toggle -->
+        <button class="btn-cyber-icon" id="sound-toggle" title="Включить эмбиент сингулярности (Web Audio)">
+          <svg id="sound-icon-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+          <svg id="sound-icon-on" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </button>
+
+        <!-- Live Status Beacon -->
+        <div class="status-beacon">
+          <span class="beacon-dot"></span>
+          <span class="beacon-text">LIVE FEED</span>
+        </div>
+
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Открыть меню">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====================================================================
+         HERO SECTION: 3D EVENT HORIZON & KINETIC TYPOGRAPHY
+         ==================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge-container">
+            <div class="hero-badge">
+              <span class="ping"></span>
+              <span>НЕЙРОННЫЙ ГОРИЗОНТ СОБЫТИЙ 2026</span>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">// СКОРОСТЬ СИНГУЛЯРНОСТИ: 1.84c</span>
+          </div>
+
+          <h1 class="hero-title" id="kinetic-title">
+            <span class="hero-title-line">ГОРИЗОНТ</span>
+            <span class="hero-title-line glow-orange">СОБЫТИЙ ИИ</span>
+          </h1>
+
+          <p class="hero-description">
+            Искусственный интеллект как космическая сингулярность: поглощает знание цивилизации, искривляет технологическое пространство и создает сверхновую цифровую эру. Актуальные инсайты из лабораторий OpenAI, DeepMind, Anthropic и ведущих AI-исследователей мира.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#featured" class="btn-primary">
+              <span>Исследовать пульс</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#singularity-lab" class="btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+              </svg>
+              <span>Лаборатория 3D</span>
+            </a>
+          </div>
+
+          <!-- 3D Scene Interactive Switcher -->
+          <div class="visualizer-quickbar">
+            <span class="quickbar-label">Режим аккреции:</span>
+            <div class="quickbar-actions">
+              <button class="mode-btn active" data-theme="orange" title="Оранжевая плазма сингулярности">Horizon</button>
+              <button class="mode-btn" data-theme="cyan" title="Квантовая синяя пульсация">Quantum</button>
+              <button class="mode-btn" data-theme="matrix" title="Био-матрица">Matrix</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetry Corner Widgets -->
+        <div class="hero-telemetry" aria-hidden="true">
+          <div class="telemetry-card">
+            <span class="tel-label">FRONTIER PARAMS</span>
+            <span class="tel-val neon-orange" id="tel-params">3.2 Trillion</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="tel-label">GLOBAL COMPUTE FLOPs</span>
+            <span class="tel-val neon-cyan" id="tel-compute">10^28 FLOPs</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="tel-label">NEURAL PARTICLES</span>
+            <span class="tel-val">4,000 ACTIVE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         LIVE TICKER BAR
+         ==================================================================== -->
+    <div class="ticker-section" id="ticker" aria-label="Срочные новости ИИ">
+      <div class="ticker-wrap">
+        <div class="ticker-label">
+          <span class="beacon-dot"></span>
+          <span>AI PULSE STREAM</span>
+        </div>
+        <div class="ticker-track-container">
+          <div class="ticker-track" id="ticker-track">
+            <!-- Dynamically populated from news.json, with default fallback -->
+            <a href="#news-grid-section" class="ticker-item"><span class="ticker-badge">LLM</span> DeepSeek и Anthropic анонсируют новые алгоритмы reasoning с открытыми весами</a>
+            <a href="#news-grid-section" class="ticker-item"><span class="ticker-badge">ROBOTICS</span> Boston Dynamics и Figure внедрили VLA-модели нового поколения для манипуляций</a>
+            <a href="#news-grid-section" class="ticker-item"><span class="ticker-badge">VISION</span> Модели генерации видео Sora 2 и Runway Gen-4 преодолевают барьер реалистичной физики</a>
+            <a href="#news-grid-section" class="ticker-item"><span class="ticker-badge">RESEARCH</span> Google DeepMind решает фундаментальную задачу фолдинга белков AlphaFold 3 с точностью до атомов</a>
+            <a href="#news-grid-section" class="ticker-item"><span class="ticker-badge">INDUSTRY</span> Крупнейшие датацентры мира переходят на оптические интерконнекты для масштабирования кластеров</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         FEATURED STORIES SECTION (TOP-3 BIG CARDS)
+         ==================================================================== -->
+    <section class="featured-section parallax-view-wrapper" id="featured">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag-wrapper">
+            <span class="section-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              В ФОКУСЕ
+            </span>
+          </div>
+          <h2 class="section-title">Главные Прорывы Сингулярности</h2>
+          <p class="section-subtitle">Ключевые события и сдвиги парадигм, формирующие будущее человечества и машинного интеллекта.</p>
+        </div>
+
+        <div class="featured-grid" id="featured-grid">
+          <!-- Dynamically populated via news-loader.js with fallback placeholders -->
+          <article class="featured-card primary" id="feat-main">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80" alt="Нейронный прорыв" class="card-img" loading="lazy">
+              <div class="card-media-overlay"></div>
+              <div class="card-badge-floating">
+                <span class="category-tag llm">LLM & Reasoning</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="card-meta">
+                <span class="source-name">OpenAI Frontier</span>
+                <span>•</span>
+                <span class="date">Октябрь 2026</span>
+                <span>•</span>
+                <span>4 мин чтения</span>
+              </div>
+              <h3 class="card-title">Эпоха автономных цепочек рассуждений: как модели нового поколения преодолели барьер галлюцинаций</h3>
+              <p class="card-summary">
+                Интеграция верифицируемого поиска дерева гипотез (MCTS) с дифференцируемыми решателями позволила добиться математической строгости рассуждений на уровне призеров олимпиад.
+              </p>
+              <div class="card-footer">
+                <div class="card-tags">
+                  <span class="tag-pill">#Reasoning</span>
+                  <span class="tag-pill">#OpenAI</span>
+                  <span class="tag-pill">#Frontier</span>
+                </div>
+                <span class="card-read-more">
+                  Читать анализ
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="featured-card secondary" id="feat-second">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80" alt="Embodied Robotics" class="card-img" loading="lazy">
+              <div class="card-media-overlay"></div>
+              <div class="card-badge-floating">
+                <span class="category-tag robotics">Robotics</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="card-meta">
+                <span class="source-name">RoboPulse Labs</span>
+                <span>•</span>
+                <span class="date">Сегодня</span>
+              </div>
+              <h3 class="card-title">Воплощенный интеллект выходит на заводы: переход от точечных навыков к генеративной ловкости</h3>
+              <p class="card-summary">
+                Новые мультимодальные модели действия (VLA) позволили гуманоидным роботам учиться манипуляциям по видеоинструкциям без ручного программирования.
+              </p>
+              <div class="card-footer">
+                <div class="card-tags">
+                  <span class="tag-pill">#VLA</span>
+                  <span class="tag-pill">#Humanoids</span>
+                </div>
+                <span class="card-read-more">
+                  Обзор
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         NEWS FEED & CATEGORIES FILTER SECTION
+         ==================================================================== -->
+    <section class="news-feed-section" id="news-grid-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag-wrapper">
+            <span class="section-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
+              ПОТОК ДАННЫХ
+            </span>
+          </div>
+          <h2 class="section-title">Лента Событий Индустрии</h2>
+          <p class="section-subtitle">Фильтруйте по направлениям или находите интересующие вас статьи мгновенным поиском.</p>
+        </div>
+
+        <div class="filter-controls-wrap">
+          <div class="filter-bar">
+            <div class="category-tabs" id="category-tabs">
+              <button class="cat-tab active" data-category="all">
+                <span>Все темы</span>
+                <span class="tab-count" id="count-all">0</span>
+              </button>
+              <button class="cat-tab" data-category="LLM">
+                <span>LLM & Reasoning</span>
+                <span class="tab-count" id="count-llm">0</span>
+              </button>
+              <button class="cat-tab" data-category="Vision">
+                <span>Computer Vision</span>
+                <span class="tab-count" id="count-vision">0</span>
+              </button>
+              <button class="cat-tab" data-category="Robotics">
+                <span>Robotics</span>
+                <span class="tab-count" id="count-robotics">0</span>
+              </button>
+              <button class="cat-tab" data-category="Research">
+                <span>Research & Papers</span>
+                <span class="tab-count" id="count-research">0</span>
+              </button>
+              <button class="cat-tab" data-category="Industry">
+                <span>Industry & Hardware</span>
+                <span class="tab-count" id="count-industry">0</span>
+              </button>
+            </div>
+
+            <div class="search-box-wrap">
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="news-search-input" class="search-input" placeholder="Поиск новостей, моделей, авторов..." aria-label="Поиск статей">
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic News Grid Container -->
+        <div class="news-grid" id="news-grid">
+          <!-- Populated via news-loader.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         INDUSTRY STATS & ACCELERATION METRICS
+         ==================================================================== -->
+    <section class="stats-section parallax-layer" data-depth="0.1" id="stats">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag-wrapper">
+            <span class="section-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+              ТЕЛЕМЕТРИЯ СИНГУЛЯРНОСТИ
+            </span>
+          </div>
+          <h2 class="section-title">Масштабы Экспоненциального Роста</h2>
+          <p class="section-subtitle">Реальные цифры и темпы экспансии искусственного интеллекта в 2026 году.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-num" data-target="2800" id="stat-1">2,800+</div>
+            <div class="stat-label">Млрд параметров в топ-моделях</div>
+            <div class="stat-delta">▲ +145% за 12 месяцев</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num" data-target="10" id="stat-2">10^28</div>
+            <div class="stat-label">FLOPs вычислительной мощности</div>
+            <div class="stat-delta">▲ Кластеры 100k+ ускорителей</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num" data-target="450" id="stat-3">450+</div>
+            <div class="stat-label">Исследований в arXiv ежедневно</div>
+            <div class="stat-delta">▲ +85% темп публикаций</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num" data-target="99" id="stat-4">99.4%</div>
+            <div class="stat-label">Когнитивная автономия агентов</div>
+            <div class="stat-delta">▲ В задачах SWE-bench</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SINGULARITY LAB / 3D CONTROLLER
+         ==================================================================== -->
+    <section class="singularity-lab-section" id="singularity-lab">
+      <div class="container">
+        <div class="singularity-lab-card">
+          <div class="lab-info">
+            <div class="section-tag-wrapper">
+              <span class="section-tag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                ИНТЕРАКТИВНОЕ ПОЛЕ
+              </span>
+            </div>
+            <h3>3D Лаборатория Сингулярности</h3>
+            <p>
+              Управляйте гравитационным полем, плотностью синаптических частиц и аккреционным диском чёрной дыры в реальном времени. WebGL шейдеры реагируют на ваш курсор и физические параметры.
+            </p>
+            <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
+              <button class="btn-primary" id="btn-burst">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                <span>Импульс Сингулярности</span>
+              </button>
+              <button class="btn-secondary" id="btn-reset-cam">
+                <span>Сброс Камеры</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="lab-controls">
+            <div class="control-row">
+              <label>
+                <span>СКОРОСТЬ ВРАЩЕНИЯ ДИСКА</span>
+                <span id="val-speed">1.0x</span>
+              </label>
+              <input type="range" min="0.1" max="3.0" step="0.1" value="1.0" class="cyber-slider" id="slider-speed">
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>ПЛОТНОСТЬ НЕЙРОННЫХ ЧАСТИЦ</span>
+                <span id="val-particles">3,000</span>
+              </label>
+              <input type="range" min="1000" max="6000" step="500" value="3000" class="cyber-slider" id="slider-particles">
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>ГРАВИТАЦИОННОЕ ИСКРИВЛЕНИЕ</span>
+                <span id="val-warp">1.5x</span>
+              </label>
+              <input type="range" min="0.5" max="3.0" step="0.25" value="1.5" class="cyber-slider" id="slider-warp">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         NEWSLETTER / TRANSMISSION SUBSCRIPTION
+         ==================================================================== -->
+    <section class="newsletter-section" id="newsletter">
+      <div class="container">
+        <div class="newsletter-card">
+          <div class="section-tag-wrapper">
+            <span class="section-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+              НЕЙРОННАЯ РАССЫЛКА
+            </span>
+          </div>
+          <h2 class="section-title">Будьте Первыми у Горизонта Событий</h2>
+          <p class="section-subtitle">
+            Еженедельный квантовый дайджест самых важных открытий, релизов моделей и закрытых аналитических отчетов прямо в ваш терминал или почту.
+          </p>
+
+          <form class="newsletter-form" id="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="ваш-нейро-email@domain.com" required aria-label="Ваш Email">
+            <button type="submit" class="btn-primary">
+              <span>Подключиться к потоку</span>
+            </button>
+          </form>
+          <div id="newsletter-status" style="margin-top: 12px; font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-green); display: none;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       ARTICLE READER MODAL
+       ==================================================================== -->
+  <div class="modal-overlay" id="article-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="modal-close" aria-label="Закрыть статью">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="modal-body">
+        <img src="" alt="" class="modal-img" id="modal-img">
+        <div class="card-meta" style="margin-bottom: 12px;">
+          <span class="category-tag llm" id="modal-cat">LLM</span>
+          <span class="source-name" id="modal-source">Источник</span>
+          <span>•</span>
+          <span id="modal-date">Дата</span>
+        </div>
+        <h2 class="modal-title" id="modal-title">Заголовок статьи</h2>
+        <div class="modal-text" id="modal-text">Полный текст...</div>
+        <div class="modal-actions">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn-primary" id="modal-link">
+            <span>Перейти к первоисточнику</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+          <button class="btn-secondary" id="modal-share">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            <span>Поделиться</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       SITE FOOTER
+       ==================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo" style="margin-bottom: var(--space-4);">
+            <div class="brand-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M2 12h2"></path><path d="M20 12h2"></path></svg>
+            </div>
+            <span class="brand-name">AI PULSE</span>
+          </div>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; max-width: 320px; margin-bottom: var(--space-4);">
+            Передовое медиа о сингулярности, больших языковых моделях, компьютерном зрении и робототехнике. На границе науки и квантового будущего.
+          </p>
+          <div class="status-beacon" style="display: inline-flex;">
+            <span class="beacon-dot"></span>
+            <span>СИНХРОНИЗАЦИЯ: КАЖДЫЕ 6 ЧАСОВ</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Направления</h4>
+          <ul class="footer-links">
+            <li><a href="#news-grid-section" data-filter="LLM">LLM & Reasoning</a></li>
+            <li><a href="#news-grid-section" data-filter="Vision">Computer Vision</a></li>
+            <li><a href="#news-grid-section" data-filter="Robotics">Robotics & Embodied AI</a></li>
+            <li><a href="#news-grid-section" data-filter="Research">Научные Препринты</a></li>
+            <li><a href="#news-grid-section" data-filter="Industry">Инфраструктура и Чипы</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Интерактив</h4>
+          <ul class="footer-links">
+            <li><a href="#hero">Сингулярность 3D</a></li>
+            <li><a href="#singularity-lab">Лаборатория параметров</a></li>
+            <li><a href="#stats">Телеметрия масштаба</a></li>
+            <li><a href="#newsletter">Дайджест новостей</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Источники</h4>
+          <ul class="footer-links">
+            <li><a href="https://openai.com/news" target="_blank" rel="noopener">OpenAI Research</a></li>
+            <li><a href="https://deepmind.google" target="_blank" rel="noopener">Google DeepMind</a></li>
+            <li><a href="https://anthropic.com" target="_blank" rel="noopener">Anthropic News</a></li>
+            <li><a href="https://huggingface.co/blog" target="_blank" rel="noopener">Hugging Face Hub</a></li>
+            <li><a href="https://arxiv.org/list/cs.AI/recent" target="_blank" rel="noopener">arXiv Computer Science</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 AI PULSE — Вселенная искусственного интеллекта. Open Source Edition.</div>
+        <div style="font-family: var(--font-mono); font-size: 0.78rem;">
+          POWERED BY THREE.JS • GSAP • LENIS • VITE
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript Bundle Entrypoint -->
+  <script type="module" src="./src/js/main.js"></script>
+</body>
+</html>
